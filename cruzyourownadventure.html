@@ -22,9 +22,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script>
 			var player, seconds = 0;
-			var point_in_time;
+			var point_in_time, start_time, end_time;
+			var start_and_stop = [];
 			var record = false;
-
 
 			function onYouTubeIframeAPIReady() {
 			    console.log("player");
@@ -45,22 +45,24 @@
 			    		if (record == true) {
 			    			$('#clip_button').text('Mark Starting Point!');
 			    			record = false;
+			    			start_time = player.getCurrentTime();
 			    		} else {
 			    			$('#clip_button').text('Mark End Point!');
 			    			record = true;
+			    			end_time = player.getCurrentTime();
 			    		}
 			    		
 			    		$('#clip_button').toggleClass("btn-danger btn-success");
 			        // player.seekTo(seconds, true);
-			        save_point_in_time();
+			        if (end_time.length && start_time.length) {
+				        save_point_in_time();
+				      }
 			    }
 			}
 
 			function save_point_in_time() {
-				if (player) {
-					var current_time = player.getCurrentTime();
-					console.log(current_time);
-					$('.saved_times_and_shiz').append('<div class="col-md-12 striped"><a href="" onclick="">'+current_time+'</a></div>');
+				if (end_time.length && start_time.length) {
+					$('.saved_times_and_shiz').append('<div class="col-md-12"><a href="" onclick="">Start Time: '+start_time+'</a></div>');
 				}
 			}
 
