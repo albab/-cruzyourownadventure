@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<title>#cruzyourownadventure</title>
+		<script src="http://www.youtube.com/player_api"></script>
+		<style>
+			#save_button {
+				margin-top: 10px;
+			}
+			.player_and_shiz {
+				margin-top: 5%;
+			}
+			.saved_times_and_shiz {
+				margin-top: 5%;
+			}
+			#cruztag {
+				font-size: 80px;
+				margin-top: 70px;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script>
+			var player, seconds = 0;
+			var point_in_time;
+			var record = false;
+
+
+			function onYouTubeIframeAPIReady() {
+			    console.log("player");
+			    player = new YT.Player('player', {
+			        events: {
+			          'onReady': onPlayerReady
+			        }
+			      });
+			}
+
+			function onPlayerReady(event) {
+			    event.target.playVideo();
+			}
+
+
+			function do_some_shiz(){
+			    if (player) {
+			    		if (record == true) {
+			    			$('#clip_button').text('Mark Starting Point!');
+			    			record = false;
+			    		} else {
+			    			$('#clip_button').text('Mark End Point!');
+			    			record = true;
+			    		}
+			    		
+			    		$('#clip_button').toggleClass("btn-danger btn-success");
+			        // player.seekTo(seconds, true);
+			        save_point_in_time();
+			    }
+			}
+
+			function save_point_in_time() {
+				if (player) {
+					var current_time = player.getCurrentTime();
+					console.log(current_time);
+					$('.saved_times_and_shiz').append('<div class="col-md-12 striped"><a href="" onclick="">'+current_time+'</a></div>');
+				}
+			}
+
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md=12 text-center"><h1 id="cruztag">#cruzyourownadventure</h1></div>
+				<div class="col-md-6 text-center player_and_shiz">
+					<iframe id="player" type="text/html" width="500" height="350" src="http://www.youtube.com/embed/g_R2TiHNE-w?enablejsapi=1" frameborder="0"></iframe>
+					<div id="save_button">
+						<button type="button" class="btn btn-success" id="clip_button" onclick="do_some_shiz()">Mark Starting Point!</button>
+					</div>
+				</div>
+
+
+				<div class="col-md-6 text-center saved_times_and_shiz">
+					<div class="saved_header"><h3>Saved Video Tmes</h3></div>
+				</div>
+
+
+
+
+			</div>
+		</div>
+	</body>
+</html>
