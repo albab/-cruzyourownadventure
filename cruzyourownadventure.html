@@ -19,6 +19,11 @@
 			#end_time_link {
 				margin-left: 5%;
 			}
+			#keyboard_heads_up {
+				font-size: 11px;
+    		color: #B3B3B3;
+    		margin-top: 10px;
+			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -89,8 +94,10 @@
 					<div id="save_button">
 						<button type="button" class="btn btn-success" id="clip_button" onclick="do_some_shiz()">Mark Starting Point!</button>
 					</div>
+					<div class="heads_up_text col-md-12 text-center">
+						<span id="keyboard_heads_up">(Pssst, if you're mouse is clicked onto the page and not the video, click 'S' instead of clicking the button if you want.)</span>
+					</div>
 				</div>
-
 
 				<div class="col-md-6 text-center saved_times_and_shiz">
 					<div class="saved_header"><h3>Saved Video Tmes</h3></div>
@@ -101,9 +108,6 @@
 						</table>
 					</div>
 				</div>
-
-
-
 
 			</div>
 		</div>
