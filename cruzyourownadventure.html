@@ -25,6 +25,13 @@
     		color: #B3B3B3;
     		margin-top: 10px;
 			}
+			#play_all a { 
+				line-height: 4.8;
+				color: #45C852;
+			}
+			#play_all a:hover {
+				text-decoration: none;
+			}
 		</style>
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -35,6 +42,8 @@
 			var start_time = 0;
 			var end_time = 0;
 			var record = false;
+			var insert_play = true;
+			var playlist = [];
 
 			function onYouTubeIframeAPIReady() {
 			    console.log("player");
@@ -56,6 +65,12 @@
 				var current_time = player.getCurrentTime();
 				if (start_time > 0 && end_time > 0) {
 					$('#video_table').append('<tr><td><a id="start_time_link" href="" onclick="player.seekTo(end_time, true);return false;">Start Time: '+end_time+'</a><a id="end_time_link" href="" onclick="player.seekTo(start_time, true); return false;"> End Time: '+start_time+'</a></td></tr>');
+					time_pair = [end_time, start_time];
+					playlist.push(time_pair);
+					if (insert_play === true) {
+						$('.saved_header').append('<span class="col-md-2" id="play_all"><a href="" onclick="play_all(); return false;">play</a></span>');
+						insert_play = false;
+					}
 					start_time = 0;
 					end_time = 0;
 					var video_elements = $('#video_table')[0];
@@ -77,6 +92,16 @@
 		    		$('#clip_button').toggleClass("btn-danger btn-success");
 		        save_point_in_time();
 			    }
+			}
+
+			function play_all() {
+				console.log(playlist);
+				var i = 0;
+				// player.seekTo(start, true);
+				// var end = playlist[i][1];
+				// player.at(end, function() {
+				//     alert("!");
+				// });
 			}
 
 
@@ -103,7 +128,7 @@
 				</div>
 
 				<div class="col-md-6 text-center saved_times_and_shiz">
-					<div class="saved_header"><h3>Saved Video Tmes</h3></div>
+					<div class="saved_header"><h3 class="col-md-10">Saved Video Times</h3></div>
 					<div class="col-md-12 table-responsive">
 						<table class="table table-striped">
 							<tbody id="video_table">
