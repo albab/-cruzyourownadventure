@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>#cruzyourownadventure</title>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
 		<script src="http://www.youtube.com/player_api"></script>
 		<style>
 			#save_button {
@@ -57,6 +58,8 @@
 					$('#video_table').append('<tr><td><a id="start_time_link" href="" onclick="player.seekTo(end_time, true);return false;">Start Time: '+end_time+'</a><a id="end_time_link" href="" onclick="player.seekTo(start_time, true); return false;"> End Time: '+start_time+'</a></td></tr>');
 					start_time = 0;
 					end_time = 0;
+					var video_elements = $('#video_table')[0];
+					var sortable = Sortable.create(video_elements);
 				}
 			}
 
